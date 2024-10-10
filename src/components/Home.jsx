@@ -61,7 +61,7 @@ const styles = {
     }
 }
 export const Home = () => {
-  const [refCircleX, setRefCircleX] = useState(-90); //1
+  const [refCircleX, setRefCircleX] = useState(0); //1
   const [refCircleY, setRefCircleY] = useState(0);  //2
   const [refCircleR, setRefCircleR] = useState(50); //3
   const [circleX, setCircleX] = useState(30);          //4
@@ -88,7 +88,7 @@ export const Home = () => {
   const [isReference, setIsReference] = useState(false);
   const [color, setColor] = useState("");
   const [isProjection, setIsProjection] = useState(false);
-  const [projectionX, setProjectionX] = useState(50);
+  const [projectionX, setProjectionX] = useState(100);
   const [projectionY, setProjectionY] = useState(0);
   const [projectionR, setProjectionR] = useState(20);
   const [invertedX, setInvertedX] = useState(0);
@@ -150,15 +150,32 @@ export const Home = () => {
           green={150}
           blue={150}
       />}
-      {isProjection && <ProjectionCircle
+      {/* {isProjection && <ProjectionCircle
         x1={refCircleX}
         y1={refCircleY}
         r1={refCircleR}
         x2={projectionX}
         y2={projectionY}
         r2={projectionR}
-      />
-      }
+      >
+        <PointPairs
+          cx={projectionX}
+          cy={projectionY}
+          x={(projectionR*projectionR*projectionY)/(projectionX*projectionX+projectionY*projectionY)}
+          y={projectionY+refCircleY}
+          r={projectionR}
+          red={200}
+          green={200}
+          blue={200}
+        />
+        { console.log("home x1: ", refCircleX) }
+        { console.log("home y1: ", refCircleY) }
+        { console.log("home r1: ", refCircleR) }
+        {console.log("home x2: ", projectionX)}
+        {console.log("home y2: ", projectionY)}
+        {console.log("home r2: ", projectionR)}
+      </ProjectionCircle>
+      } */}
   </svg>;
 
   return (
@@ -217,7 +234,7 @@ export const Home = () => {
                 pointY={pointY}
             />
               <br />
-              <button style={styles.projectionButton} onClick={() => setIsProjection(!isProjection)} >Projection Circle</button>
+              {/* <button style={styles.projectionButton} onClick={() => setIsProjection(!isProjection)} >Projection Circle</button> */}
               {isProjection && <>
                   <label>X: </label>
                   <input type="number" value={projectionX} onChange={(x) => setProjectionX(parseInt(x.target.value))} />
