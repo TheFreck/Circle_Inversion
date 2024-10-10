@@ -3,6 +3,10 @@ import React, { useEffect } from "react";
 export const PointPairs = ({ cx, cy, x, y, r, red, green, blue }) => {
     const Y = (r * r * y) / (x * x + y * y);
     const X = (r * r * x) / (x * x + y * y);
+
+    useEffect(() => {
+      console.log()
+    },[]);
     
     return <>
         <circle cx={x+cx} cy={y+cy} r={.5} fill={`rgb(${red}, ${green}, ${blue})`} strokeWidth={.1} />
