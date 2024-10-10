@@ -1,3 +1,5 @@
+
+
 export const FormControls = {
   CircleControls: ({ setCircleX, circleX, setCircleY, circleY, setCircleR, circleR }) => <div>
     <label>X: </label>
@@ -47,7 +49,6 @@ export const FormControls = {
   PointControls: ({setPointX,pointX,setPointY,pointY}) => <>
     <label>X: </label>
     <input type="number" value={pointX} onChange={(x) => x.target.value ? setPointX(parseInt(x.target.value)) : 0} />
-    <br />
     <label>Y: </label>
     <input type="number" value={pointY} onChange={(y) => y.target.value ? setPointY(parseInt(y.target.value)) : 0} />
     <br />
