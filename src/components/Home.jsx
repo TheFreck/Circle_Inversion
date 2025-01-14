@@ -56,8 +56,7 @@ const styles = {
         top: 0,
         right: 0,
         bottom: 0,
-        width: "80vw",
-        background: "tan",
+        width: "80vw"
     }
 }
 export const Home = () => {
