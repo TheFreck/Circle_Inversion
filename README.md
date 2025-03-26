@@ -1,6 +1,4 @@
-# Circle Inversion
-
-See the deployed project [here](https://thefreck.github.io/Circle_Inversion/)
+# [Circle Inversion](https://thefreck.github.io/Circle_Inversion/)
 
 This is a project to explore the fascinating mathematical concept of Circle Inversion which is a way to map every point inside a circle to every point outside the circle. Essentially it is the process of turning a circle inside out. What this means in practice is that a point on the outside edge of the circle will project onto the same point while a point on the center of the circle will project onto infinity. Every point in between will be mapped relative to infinity and the circle edge.
 
