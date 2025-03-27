@@ -6,6 +6,7 @@ export const PointPairs3d = ({cx,cy,cz,x,y,z,rad,r,g,b}) => {
     const X = (rad*rad*x)/(x*x+y*y+z*z);
     const Y = (rad*rad*y)/(x*x+y*y+z*z);
     const Z = (rad*rad*z)/(x*x+y*y+z*z);
+    const matrix = new THREE.Matrix4();
     
     return (
         <mesh>
@@ -16,9 +17,7 @@ export const PointPairs3d = ({cx,cy,cz,x,y,z,rad,r,g,b}) => {
                     args={[1,10,10]}
                 />
                 <meshPhongMaterial
-                    color="green"
-                    emissive="green"
-                    emissiveIntensity={1}
+                    color="white"
                 />
             </mesh>
             <mesh
@@ -29,8 +28,6 @@ export const PointPairs3d = ({cx,cy,cz,x,y,z,rad,r,g,b}) => {
                 />
                 <meshPhongMaterial
                     color="blue"
-                    emissive="blue"
-                    emissiveIntensity={1}
                 />
             </mesh>
             <Line
