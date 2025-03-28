@@ -4,7 +4,7 @@ import SouthIcon from '@mui/icons-material/South';
 import EastIcon from '@mui/icons-material/East';
 import WestIcon from '@mui/icons-material/West';
 
-export const XYZSlider = ({ x, y, z, setX, setY, setZ, r }) => {
+export const XYZSlider = ({ x, y, z, setX, setY, setZ, r, continuous }) => {
 
     return (
         <Stack
@@ -27,7 +27,7 @@ export const XYZSlider = ({ x, y, z, setX, setY, setZ, r }) => {
                 </Typography>
                 <Slider
                     value={x}
-                    onChange={(ex) => setX(ex.target.value)}
+                    onChange={(ex) => setX(continuous ? ex.target.value / 200 : ex.target.value)}
                     valueLabelDisplay="on"
                     min={-r}
                     max={r}
@@ -48,7 +48,7 @@ export const XYZSlider = ({ x, y, z, setX, setY, setZ, r }) => {
                 </Typography>
                 <Slider
                     value={y}
-                    onChange={ey => setY(ey.target.value)}
+                    onChange={ey => setY(continuous ? ey.target.value / 200 : ey.target.value)}
                     valueLabelDisplay="on"
                     min={-r}
                     max={r}
@@ -68,7 +68,7 @@ export const XYZSlider = ({ x, y, z, setX, setY, setZ, r }) => {
                 </Typography>
                 <Slider
                     value={z}
-                    onChange={ez => setZ(ez.target.value)}
+                    onChange={ez => setZ(continuous ? ez.target.value / 200  : ez.target.value)}
                     valueLabelDisplay="on"
                     min={-r}
                     max={r}

@@ -17,7 +17,7 @@ export const InvertedSphere = ({x,y,z,radius,colorIn,colorOut}) => {
                     color={colorIn}
                     side={THREE.BackSide}
                     transparent={true}
-                    opacity={.5}
+                    opacity={.9}
                 />
             </mesh>
             <mesh
@@ -31,7 +31,7 @@ export const InvertedSphere = ({x,y,z,radius,colorIn,colorOut}) => {
                     color={colorOut}
                     side={THREE.FrontSide}
                     transparent={true}
-                    opacity={.2}
+                    opacity={.8}
                 />
             </mesh>
         </mesh>

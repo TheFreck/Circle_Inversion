@@ -20,9 +20,13 @@ export const Home3d = () => {
     const [baseY, setBaseY] = useState(0);
     const [baseZ, setBaseZ] = useState(0);
     const [baseR, setBaseR] = useState(50);
-    const [pointX, setPointX] = useState(25);
-    const [pointY, setPointY] = useState(-25);
-    const [pointZ, setPointZ] = useState(25);
+    const [pointX, setPointX] = useState(50);
+    const [pointY, setPointY] = useState(50);
+    const [pointZ, setPointZ] = useState(45);
+
+    const [ax,setAx] = useState(0.0);
+    const [ay,setAy] = useState(0.0);
+    const [az,setAz] = useState(0.0);
 
     const cameraRef = useRef();
 
@@ -47,6 +51,16 @@ export const Home3d = () => {
             }}
         >
             <XYZSlider
+                x={ax}
+                y={ay}
+                z={az}
+                setX={setAx}
+                setY={setAy}
+                setZ={setAz}
+                r={200}
+                continuous={true}
+            />
+            <XYZSlider
                 x={pointX}
                 y={pointY}
                 z={pointZ}
@@ -66,7 +80,7 @@ export const Home3d = () => {
             >
                 <ambientLight
                     intensity={1}
-                    color="#fa0202"
+                    color="white"
                 />
                 <pointLight
                     position={[200,200,200]}
@@ -136,6 +150,9 @@ export const Home3d = () => {
                             r={100}
                             b={100}
                             g={100}
+                            ax={ax}
+                            ay={ay}
+                            az={az}
                         />
                     </mesh>
                 }
