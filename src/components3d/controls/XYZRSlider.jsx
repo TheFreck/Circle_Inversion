@@ -1,21 +1,16 @@
 import { Box, Slider, Stack, Typography } from "@mui/material";
-import NorthIcon from '@mui/icons-material/North';
-import SouthIcon from '@mui/icons-material/South';
-import EastIcon from '@mui/icons-material/East';
-import WestIcon from '@mui/icons-material/West';
 
-export const XYZSlider = ({ x, y, z, setX, setY, setZ, r, continuous }) => {
+export const XYZRSlider = ({ x, y, z, setX, setY, setZ, r, continuous }) => {
 
     return (
         <Stack
             spacing={2}
             direction="column"
-            sx={{
-                border: "solid",
-                width: "30vw",
-                height: "20vh",
-                margin: "5vh 0"
-            }}
+            // sx={{
+            //     width: "30vw",
+            //     height: "20vh",
+            //     margin: "5vh 0"
+            // }}
         >
             <Stack
                 spacing={2}
@@ -83,4 +78,4 @@ export const XYZSlider = ({ x, y, z, setX, setY, setZ, r, continuous }) => {
     )
 }
 
-export default XYZSlider;
+export default XYZRSlider;

@@ -1,18 +1,22 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { FlyControls, Line, OrbitControls } from '@react-three/drei'
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from '@react-three/drei'
 import InvertedSphere from "./InvertedSphere";
 import { PointPairs3d } from "./PointPairs3d";
-import XYZSlider from "./XYZSlider";
 import { Container } from "@mui/material";
+import Circle3d from "./Circle3d";
+import ControlsContext from "./ControlsContext";
+import ShapeControls from "./controls/ShapeControls";
+import SurroundLights from "./SurroundLights";
+import PointsCircle3d from "./PointsCircle3d";
 
 export const Home3d = () => {
     const [aspectWidth, setAspectWidth] = useState(200);
     const [aspectHeight, setAspectHeight] = useState(100);
-    const [near, setNear] = useState(1);
+    const [near, setNear] = useState(.1);
     const [far, setFar] = useState(10000);
-    const [position, setPosition] = useState([200, 0, 0]);
+    const [position, setPosition] = useState([0, 0, 200]);
     const [fov, setFov] = useState(45);
     const [ready, setReady] = useState(false);
 
@@ -20,13 +24,25 @@ export const Home3d = () => {
     const [baseY, setBaseY] = useState(0);
     const [baseZ, setBaseZ] = useState(0);
     const [baseR, setBaseR] = useState(50);
-    const [pointX, setPointX] = useState(50);
-    const [pointY, setPointY] = useState(50);
-    const [pointZ, setPointZ] = useState(45);
 
-    const [ax,setAx] = useState(0.0);
-    const [ay,setAy] = useState(0.0);
-    const [az,setAz] = useState(0.0);
+    // shapes
+    const [isPoint, setIsPoint] = useState(false);
+    const [isCircle, setIsCircle] = useState(false);
+
+    // point
+    const [pointX, setPointX] = useState(0);
+    const [pointY, setPointY] = useState(0);
+    const [pointZ, setPointZ] = useState(50);
+
+    // circle
+    const [circleX, setCircleX] = useState(0);
+    const [circleY, setCircleY] = useState(0);
+    const [circleZ, setCircleZ] = useState(25);
+    const [circleR, setCircleR] = useState(25);
+    const [rotateCX,setRotateCX] = useState(1);
+    const [rotateCY,setRotateCY] = useState(1);
+    const [rotateCZ,setRotateCZ] = useState(1);
+    const [circleN, setCircleN] = useState(50);
 
     const cameraRef = useRef();
 
@@ -38,126 +54,85 @@ export const Home3d = () => {
         setReady(true);
     }, []);
 
+    const PointsCircle3dCallback = useCallback(() => <PointsCircle3d
+        n={circleN}
+    />
+    ,[circleX,circleY,circleZ,circleR,rotateCX,rotateCY,rotateCZ]);
+
     return (
-        <Container
-            role="contain-everything"
-            sx={{
-                display: "flex",
-                flexDirection: "row",
-                maxWidth: "96vw !important",
-                border: "solid",
-                width: "95vw",
-                height: "100%"
+        <ControlsContext.Provider
+            value={{
+                baseX, setBaseX,
+                baseY, setBaseY,
+                baseZ, setBaseZ,
+                baseR, setBaseR,
+                isPoint, setIsPoint,
+                isCircle, setIsCircle,
+                pointX, setPointX,
+                pointY, setPointY,
+                pointZ, setPointZ,
+                circleX, setCircleX,
+                circleY, setCircleY,
+                circleZ, setCircleZ,
+                circleR, setCircleR,
+                circleN, setCircleN,
+                rotateCX, setRotateCX,
+                rotateCY, setRotateCY,
+                rotateCZ, setRotateCZ,
             }}
         >
-            <XYZSlider
-                x={ax}
-                y={ay}
-                z={az}
-                setX={setAx}
-                setY={setAy}
-                setZ={setAz}
-                r={200}
-                continuous={true}
-            />
-            <XYZSlider
-                x={pointX}
-                y={pointY}
-                z={pointZ}
-                setX={setPointX}
-                setY={setPointY}
-                setZ={setPointZ}
-                r={baseR}
-            />
-            <Canvas
-                camera={cameraRef.current}
-                style={{
-                    width: "90vw",
-                    height: "98vh",
+            <Container
+                role="contain-everything"
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    maxWidth: "96vw !important",
                     border: "solid",
-                    background: "black"
+                    width: "95vw",
+                    height: "100%"
                 }}
             >
-                <ambientLight
-                    intensity={1}
-                    color="white"
-                />
-                <pointLight
-                    position={[200,200,200]}
-                    color="#faa302"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[-200,-200,-200]}
-                    color="#97fa02"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[-200,200,200]}
-                    color="#02fa2c"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[200,-200,-200]}
-                    color="#02fa2c"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[-200,-200,200]}
-                    color="#0234fa"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[-200,200,-200]}
-                    color="#9702fa"
-                    intensity={1000000}
-                />
-                <pointLight
-                    position={[200,-200,200]}
-                    color="#9702fa"
-                    intensity={1000000}
-                />
-                <OrbitControls
-                    // enabled={false}
-                />
-                {
-                    ready &&
-                    <mesh>
-                        <InvertedSphere
-                            radius={1}
-                            x={baseX}
-                            y={baseY}
-                            z={baseZ}
-                            colorIn="black"
-                            colorOut="black"
-                        />
-                        <InvertedSphere
-                            radius={baseR}
-                            x={baseX}
-                            y={baseY}
-                            z={baseZ}
-                            colorIn="yellow"
-                            colorOut="red"
-                        />
-                        <PointPairs3d
-                            cx={baseX}
-                            cy={baseY}
-                            cz={baseZ}
-                            x={pointX}
-                            y={pointY}
-                            z={pointZ}
-                            rad={baseR}
-                            r={100}
-                            b={100}
-                            g={100}
-                            ax={ax}
-                            ay={ay}
-                            az={az}
-                        />
-                    </mesh>
-                }
-            </Canvas>
-        </Container>
+                <ShapeControls />
+                <Canvas
+                    camera={cameraRef.current}
+                    style={{
+                        width: "90vw",
+                        height: "98vh",
+                        border: "solid",
+                        background: "black"
+                    }}
+                >
+                    <SurroundLights />
+                    <OrbitControls
+                        // enabled={false}
+                    />
+                    {
+                        ready &&
+                        <mesh>
+                            <InvertedSphere
+                                colorIn="black"
+                                colorOut="black"
+                                r={1}
+                            />
+                            <InvertedSphere
+                                colorIn="black"
+                                colorOut="white"
+                                r={baseR}
+                            />
+                            {
+                                isPoint &&
+                                <PointPairs3d />
+                            }
+                            {
+                                isCircle &&
+                                <PointsCircle3dCallback />
+                            }
+                        </mesh>
+                    }
+                </Canvas>
+            </Container>
+
+        </ControlsContext.Provider>
     )
 }
 

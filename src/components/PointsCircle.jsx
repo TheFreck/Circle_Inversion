@@ -10,7 +10,11 @@ export const PointsCircle = ({ cx, cy, x, y, r, refR, n }) => {
             const red = -Math.cos(i) * 155 + 50;
             const green = -Math.cos(i) * 10 + 105;
             const blue = -Math.cos(i) * 20 + 35;
-            const point = { x: Math.cos(i) * r + x, y: Math.sin(i) * r + y, red, green, blue };
+            const point = { 
+                x: Math.cos(i) * r + x, 
+                y: Math.sin(i) * r + y, 
+                red, green, blue 
+            };
             positions.push(point);
         }
         setPointPositions(positions);

@@ -1,92 +1,81 @@
 import { Line } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import ControlsContext from "./ControlsContext";
 
-export const PointPairs3d = ({cx,cy,cz,x,y,z,rad,r,g,b,ax,ay,az}) => {
+export const PointPairs3d = () => {
+    const { pointX, pointY, pointZ, baseX, baseY, baseZ, baseR } = useContext(ControlsContext);
     const splashRef = useRef();
-    const R = Math.sqrt(x*x+y*y+z*z);
-    const X = (rad*rad*x)/(x*x+y*y+z*z);
-    const Y = (rad*rad*y)/(x*x+y*y+z*z);
-    const Z = (rad*rad*z)/(x*x+y*y+z*z);
-    let X1 = (R/rad)*X;
-    let Y1 = (R/rad)*Y;
-    let Z1 = (R/rad)*Z;
-    useEffect(() => {
+    const R = Math.sqrt(pointX * pointX + pointY * pointY + pointZ * pointZ);
+    const X = (baseR * baseR * pointX) / (pointX * pointX + pointY * pointY + pointZ * pointZ);
+    const Y = (baseR * baseR * pointY) / (pointX * pointX + pointY * pointY + pointZ * pointZ);
+    const Z = (baseR * baseR * pointZ) / (pointX * pointX + pointY * pointY + pointZ * pointZ);
+    let X1 = (R / baseR) * X;
+    let Y1 = (R / baseR) * Y;
+    let Z1 = (R / baseR) * Z;
+    const outer = 1.00399;
+    const inner = .994;
 
-        splashRef.current.rotation.x = Math.PI*ax; //orange
-        splashRef.current.rotation.y = Math.PI*ay; //green
-        splashRef.current.rotation.z = Math.PI*az; //blue
-    });
-
-    useFrame(() => {
-        // splashRef.current.rotation.x += .01;
-        // splashRef.current.rotation.y += .01;
-        // splashRef.current.rotation.z += .01;
-    })
-    
     return (
         <mesh>
             <mesh
-                position={[x+cx,y+cy,z+cz]}
+                position={[pointX + baseX, pointY + baseY, pointZ + baseZ]}
                 castShadow
                 receiveShadow
             >
                 <sphereGeometry
-                    args={[1,10,10]}
+                    args={[1, 50, 50]}
                 />
                 <meshPhongMaterial
                     color="white"
                 />
             </mesh>
             <mesh
-                position={[X+cx,Y+cy,Z+cz]}
+                position={[X + baseX, Y + baseY, Z + baseZ]}
                 castShadow
                 receiveShadow
             >
                 <sphereGeometry
-                    args={[1,10,10]}
+                    args={[1, 50, 50]}
                 />
                 <meshPhongMaterial
                     color="blue"
                 />
             </mesh>
-                <mesh
-                    ref={splashRef}
-                    position={[X1*1.0025,Y1*1.0025,Z1*1.0025]}
-                    castShadow
-                    receiveShadow
-                >
-                    <circleGeometry
-                        args={[10,10]}
-                    />
-                    <sphereGeometry
-                        args={[.25,10,10]}
-                    />
-                    <meshPhongMaterial
-                        color="black"
-                    />
-                </mesh>
-                <mesh
-                    ref={splashRef}
-                    position={[X1*.995,Y1*.995,Z1*.995]}
-                    castShadow
-                    receiveShadow
-                >
-                    <sphereGeometry
-                        args={[.25,10,10]}
-                    />
-                    <meshPhongMaterial
-                        color="black"
-                    />
-                </mesh>
+            <mesh
+                ref={splashRef}
+                position={[X1 * outer, Y1 * outer, Z1 * outer]}
+                castShadow
+                receiveShadow
+            >
+                <sphereGeometry
+                    args={[.25, 50, 50]}
+                />
+                <meshPhongMaterial
+                    color="black"
+                />
+            </mesh>
+            <mesh
+                ref={splashRef}
+                position={[X1 * inner, Y1 * inner, Z1 * inner]}
+                castShadow
+                receiveShadow
+            >
+                <sphereGeometry
+                    args={[.25, 50, 50]}
+                />
+                <meshPhongMaterial
+                    color="black"
+                />
+            </mesh>
             <Line
-                points={[[0,0,0],[X,Y,Z]]}
+                points={[[0, 0, 0], [X, Y, Z]]}
                 color="green"
                 lineWidth={1}
             />
             <Line
-                points={[[0,0,0],[x,y,z]]}
+                points={[[0, 0, 0], [pointX, pointY, pointZ]]}
                 color="green"
                 lineWidth={1}
             />

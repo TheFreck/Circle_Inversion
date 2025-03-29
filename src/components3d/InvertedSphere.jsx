@@ -1,37 +1,39 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import * as THREE from "three";
+import ControlsContext from "./ControlsContext";
 
-export const InvertedSphere = ({x,y,z,radius,colorIn,colorOut}) => {
+export const InvertedSphere = ({colorIn,colorOut,r}) => {
+    const {baseX,baseY,baseZ} = useContext(ControlsContext);
     const sphereRef = useRef();
 
     return (
         <mesh>
             <mesh
                 ref={sphereRef}
-                position={[x,y,z]}
+                position={[baseX,baseY,baseZ]}
             >
                 <sphereGeometry
-                    args={[radius,50,50]}
+                    args={[r,50,50]}
                 />
                 <meshPhongMaterial
                     color={colorIn}
                     side={THREE.BackSide}
                     transparent={true}
-                    opacity={.9}
+                    opacity={.8}
                 />
             </mesh>
             <mesh
                 ref={sphereRef}
-                position={[x,y,z]}
+                position={[baseX,baseY,baseZ]}
             >
                 <sphereGeometry
-                    args={[radius,50,50]}
+                    args={[r,50,50]}
                 />
                 <meshPhongMaterial
                     color={colorOut}
                     side={THREE.FrontSide}
                     transparent={true}
-                    opacity={.8}
+                    opacity={.5}
                 />
             </mesh>
         </mesh>
