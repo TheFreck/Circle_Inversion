@@ -10,6 +10,7 @@ import ControlsContext from "./ControlsContext";
 import ShapeControls from "./controls/ShapeControls";
 import SurroundLights from "./SurroundLights";
 import PointsCircle3d from "./PointsCircle3d";
+import PointsSphere3d from "./PointsSphere3d";
 
 export const Home3d = () => {
     const [aspectWidth, setAspectWidth] = useState(200);
@@ -28,6 +29,7 @@ export const Home3d = () => {
     // shapes
     const [isPoint, setIsPoint] = useState(false);
     const [isCircle, setIsCircle] = useState(false);
+    const [isSphere, setIsSphere] = useState(false);
 
     // point
     const [pointX, setPointX] = useState(0);
@@ -39,10 +41,14 @@ export const Home3d = () => {
     const [circleY, setCircleY] = useState(0);
     const [circleZ, setCircleZ] = useState(25);
     const [circleR, setCircleR] = useState(25);
-    const [rotateCX,setRotateCX] = useState(1);
-    const [rotateCY,setRotateCY] = useState(1);
-    const [rotateCZ,setRotateCZ] = useState(1);
     const [circleN, setCircleN] = useState(50);
+
+    // sphere
+    const [sphereX, setSphereX] = useState(0);
+    const [sphereY, setSphereY] = useState(25);
+    const [sphereZ, setSphereZ] = useState(0);
+    const [sphereR, setSphereR] = useState(25);
+    const [sphereN, setSphereN] = useState(25);
 
     const cameraRef = useRef();
 
@@ -57,7 +63,12 @@ export const Home3d = () => {
     const PointsCircle3dCallback = useCallback(() => <PointsCircle3d
         n={circleN}
     />
-    ,[circleX,circleY,circleZ,circleR,rotateCX,rotateCY,rotateCZ]);
+    ,[circleX,circleY,circleZ,circleR, baseR]);
+
+    const PointsSphere3dCallback = useCallback(() => <PointsSphere3d
+        n={sphereN}
+    />
+    ,[sphereX,sphereY,sphereZ,sphereR, baseR]);
 
     return (
         <ControlsContext.Provider
@@ -68,6 +79,7 @@ export const Home3d = () => {
                 baseR, setBaseR,
                 isPoint, setIsPoint,
                 isCircle, setIsCircle,
+                isSphere, setIsSphere,
                 pointX, setPointX,
                 pointY, setPointY,
                 pointZ, setPointZ,
@@ -76,9 +88,11 @@ export const Home3d = () => {
                 circleZ, setCircleZ,
                 circleR, setCircleR,
                 circleN, setCircleN,
-                rotateCX, setRotateCX,
-                rotateCY, setRotateCY,
-                rotateCZ, setRotateCZ,
+                sphereX, setSphereX,
+                sphereY, setSphereY,
+                sphereZ, setSphereZ,
+                sphereR, setSphereR,
+                sphereN, setSphereN,
             }}
         >
             <Container
@@ -126,6 +140,10 @@ export const Home3d = () => {
                             {
                                 isCircle &&
                                 <PointsCircle3dCallback />
+                            }
+                            {
+                                isSphere &&
+                                <PointsSphere3dCallback />
                             }
                         </mesh>
                     }

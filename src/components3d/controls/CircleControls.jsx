@@ -1,8 +1,6 @@
 import { Slider, Stack, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
 import ControlsContext from "../ControlsContext";
-import { Label } from "@mui/icons-material";
-
 
 export const CircleControls = () => {
     const {
@@ -10,9 +8,6 @@ export const CircleControls = () => {
         circleY, setCircleY, 
         circleZ, setCircleZ, 
         circleR, setCircleR,
-        rotateCX, setRotateCX,
-        rotateCY, setRotateCY,
-        rotateCZ, setRotateCZ,
         baseR
     } = useContext(ControlsContext);
 
@@ -34,17 +29,6 @@ export const CircleControls = () => {
                 min={-baseR}
                 max={baseR}
             />
-            {/* <Typography>
-                Rotate X
-            </Typography>
-            <Slider
-                label="rotate X"
-                value={rotateCX}
-                onChange={(rx) => setRotateCX(rx.target.value)}
-                valueLabelDisplay="on"
-                min={0}
-                max={100}
-            /> */}
             <Typography>
                 Center Y
             </Typography>
@@ -56,17 +40,6 @@ export const CircleControls = () => {
                 min={-baseR}
                 max={baseR}
             />
-            {/* <Typography>
-                Rotate Y
-            </Typography>
-            <Slider
-                label="rotate Y"
-                value={rotateCY}
-                onChange={(ry) => setRotateCY(ry.target.value)}
-                valueLabelDisplay="on"
-                min={0}
-                max={100}
-            /> */}
             <Typography>
                 Center Z
             </Typography>
@@ -78,17 +51,6 @@ export const CircleControls = () => {
                 min={-baseR}
                 max={baseR}
             />
-            {/* <Typography>
-                Rotate Z
-            </Typography>
-            <Slider
-                label="rotate Z"
-                value={rotateCZ}
-                onChange={(rz) => setRotateCZ(rz.target.value)}
-                valueLabelDisplay="on"
-                min={0}
-                max={100}
-            /> */}
             <Typography>
                 Radius
             </Typography>

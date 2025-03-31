@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ControlsContext from "../ControlsContext";
 import XYZRSlider from "./XYZRSlider";
 import CircleControls from "./CircleControls";
+import SphereControls from "./SphereControls";
 
 export const ShapeControls = () => {
     const {
@@ -18,6 +19,8 @@ export const ShapeControls = () => {
         setPointY,
         pointZ,
         setPointZ,
+        isSphere,
+        setIsSphere,
     } = useContext(ControlsContext);
 
     return (
@@ -54,6 +57,17 @@ export const ShapeControls = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <CircleControls />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={isSphere}
+                onChange={() => setIsSphere(!isSphere)}
+            >
+                <AccordionSummary>
+                    Sphere
+                </AccordionSummary>
+                <AccordionDetails>
+                    <SphereControls />
                 </AccordionDetails>
             </Accordion>
         </Stack>
