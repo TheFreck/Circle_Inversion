@@ -8,6 +8,7 @@ export const CircleControls = () => {
         circleY, setCircleY, 
         circleZ, setCircleZ, 
         circleR, setCircleR,
+        circleN, setCircleN,
         baseR
     } = useContext(ControlsContext);
 
@@ -61,6 +62,11 @@ export const CircleControls = () => {
                 valueLabelDisplay="on"
                 min={1}
                 max={baseR}
+            />
+            <TextField
+                label="N Points"
+                value={circleN}
+                onChange={n => setCircleN(n.target.value)}
             />
         </Stack>
     )

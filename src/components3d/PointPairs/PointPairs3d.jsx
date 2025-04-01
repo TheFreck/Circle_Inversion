@@ -2,10 +2,22 @@ import { Line } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import ControlsContext from "./ControlsContext";
+import ControlsContext from "../ControlsContext";
 
 export const PointPairs3d = () => {
-    const { pointX, pointY, pointZ, baseX, baseY, baseZ, baseR } = useContext(ControlsContext);
+    const { 
+        pointX, 
+        pointY, 
+        pointZ, 
+        baseX, 
+        baseY, 
+        baseZ, 
+        baseR,
+        innerLines,
+        surfaceLines,
+        outerLines
+     } = useContext(ControlsContext);
+
     const splashRef = useRef();
     const R = Math.sqrt(pointX * pointX + pointY * pointY + pointZ * pointZ);
     const X = (baseR * baseR * pointX) / (pointX * pointX + pointY * pointY + pointZ * pointZ);
@@ -70,14 +82,19 @@ export const PointPairs3d = () => {
                 />
             </mesh>
             <Line
-                points={[[0, 0, 0], [X, Y, Z]]}
-                color="green"
-                lineWidth={1}
-            />
-            <Line
                 points={[[0, 0, 0], [pointX, pointY, pointZ]]}
                 color="green"
-                lineWidth={1}
+                lineWidth={innerLines ? 1 : 0}
+            />
+            <Line
+                points={[[pointX,pointY,pointZ],[X1,Y1,Z1]]}
+                color="green"
+                lineWidth={surfaceLines ? 1 : 0}
+            />
+            <Line
+                points={[[X1,Y1,Z1], [X, Y, Z]]}
+                color="green"
+                lineWidth={outerLines ? 1 : 0}
             />
         </mesh>
     )

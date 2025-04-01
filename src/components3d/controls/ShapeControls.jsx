@@ -4,23 +4,31 @@ import ControlsContext from "../ControlsContext";
 import XYZRSlider from "./XYZRSlider";
 import CircleControls from "./CircleControls";
 import SphereControls from "./SphereControls";
+import { LineControls } from "./LineControls";
+import RectangleControls from "./RectangleControls";
+import CuboidControls from "./CuboidControls";
 
 export const ShapeControls = () => {
     const {
-        isPoint, 
-        setIsPoint, 
-        isCircle, 
-        setIsCircle,
-        baseR,
-        setBaseR,
-        pointX,
-        setPointX,
-        pointY,
-        setPointY,
-        pointZ,
-        setPointZ,
-        isSphere,
-        setIsSphere,
+        isPoint, setIsPoint, 
+        isCircle, setIsCircle,
+        baseR,setBaseR,
+        pointX,setPointX,
+        pointY,setPointY,
+        pointZ,setPointZ,
+        isSphere,setIsSphere,
+        isRectangle,setIsRectangle,
+        isCuboid, setIsCuboid,
+        innerLine,setInnerLine,
+        surfaceLine,setSurfaceLine,
+        outerLine,setOuterLine,
+        cuboidX, setCuboidX,
+        cuboidY, setCuboidY,
+        cuboidZ, setCuboidZ,
+        cuboidW, setCuboidW,
+        cuboidH, setCuboidH,
+        cuboidD, setCuboidD,
+        cuboidN, setCuboidN,
     } = useContext(ControlsContext);
 
     return (
@@ -70,6 +78,29 @@ export const ShapeControls = () => {
                     <SphereControls />
                 </AccordionDetails>
             </Accordion>
+            <Accordion
+                expanded={isRectangle}
+                onChange={() => setIsRectangle(!isRectangle)}
+            >
+                <AccordionSummary>
+                    Rectangle
+                </AccordionSummary>
+                <AccordionDetails>
+                    <RectangleControls />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={isCuboid}
+                onChange={() => setIsCuboid(!isCuboid)}
+            >
+                <AccordionSummary>
+                    Cuboid
+                </AccordionSummary>
+                <AccordionDetails>
+                    <CuboidControls />
+                </AccordionDetails>
+            </Accordion>
+            <LineControls />
         </Stack>
     );
 }

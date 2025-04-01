@@ -8,6 +8,7 @@ export const SphereControls = () => {
         sphereY, setSphereY,
         sphereZ, setSphereZ,
         sphereR, setSphereR,
+        sphereN, setSphereN,
         baseR
     } = useContext(ControlsContext);
 
@@ -58,7 +59,7 @@ export const SphereControls = () => {
                 max={baseR}
             />
             <TextField
-                lable="Radius"
+                label="Radius"
                 value={sphereR}
                 onChange={r => setSphereR(r.target.value)}
             />  
@@ -69,6 +70,11 @@ export const SphereControls = () => {
                 valueLabelDisplay="on"
                 min={1}
                 max={baseR}
+            />
+            <TextField
+                label="N Points"
+                value={sphereN}
+                onChange={n => setSphereN(n.target.value)}
             />
         </Stack>
     )

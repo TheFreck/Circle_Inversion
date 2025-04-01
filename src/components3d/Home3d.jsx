@@ -3,14 +3,16 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from '@react-three/drei'
 import InvertedSphere from "./InvertedSphere";
-import { PointPairs3d } from "./PointPairs3d";
+import { PointPairs3d } from "./PointPairs/PointPairs3d";
 import { Container } from "@mui/material";
 import Circle3d from "./Circle3d";
 import ControlsContext from "./ControlsContext";
 import ShapeControls from "./controls/ShapeControls";
 import SurroundLights from "./SurroundLights";
-import PointsCircle3d from "./PointsCircle3d";
-import PointsSphere3d from "./PointsSphere3d";
+import PointsCircle3d from "./PointsCircle/PointsCircle3d";
+import PointsSphere3d from "./PointsSphere/PointsSphere3d";
+import { PointsRectangle3d } from "./PointsRectangle/PointsRectangle3d";
+import PointsCuboid3d from "./PointsCuboid/PointsCuboid3d";
 
 export const Home3d = () => {
     const [aspectWidth, setAspectWidth] = useState(200);
@@ -30,6 +32,8 @@ export const Home3d = () => {
     const [isPoint, setIsPoint] = useState(false);
     const [isCircle, setIsCircle] = useState(false);
     const [isSphere, setIsSphere] = useState(false);
+    const [isRectangle, setIsRectangle] = useState(false);
+    const [isCuboid, setIsCuboid] = useState(false);
 
     // point
     const [pointX, setPointX] = useState(0);
@@ -48,7 +52,29 @@ export const Home3d = () => {
     const [sphereY, setSphereY] = useState(25);
     const [sphereZ, setSphereZ] = useState(0);
     const [sphereR, setSphereR] = useState(25);
-    const [sphereN, setSphereN] = useState(25);
+    const [sphereN, setSphereN] = useState(26);
+
+    // square
+    const [rectangleX, setRectangleX] = useState(0);
+    const [rectangleY, setRectangleY] = useState(0);
+    const [rectangleZ, setRectangleZ] = useState(0);
+    const [rectangleW, setRectangleW] = useState(10);
+    const [rectangleH, setRectangleH] = useState(10);
+    const [rectangleN, setRectangleN] = useState(10);
+
+    // cuboid
+    const [cuboidX, setCuboidX] = useState(0);
+    const [cuboidY, setCuboidY] = useState(0);
+    const [cuboidZ, setCuboidZ] = useState(20);
+    const [cuboidW, setCuboidW] = useState(40);
+    const [cuboidH, setCuboidH] = useState(40);
+    const [cuboidD, setCuboidD] = useState(40);
+    const [cuboidN, setCuboidN] = useState(10);
+    
+    // lines
+    const [innerLines, setInnerLines] = useState(false);
+    const [surfaceLines, setSurfaceLines] = useState(false);
+    const [outerLines, setOuterLines] = useState(false);
 
     const cameraRef = useRef();
 
@@ -62,13 +88,23 @@ export const Home3d = () => {
 
     const PointsCircle3dCallback = useCallback(() => <PointsCircle3d
         n={circleN}
-    />
-    ,[circleX,circleY,circleZ,circleR, baseR]);
+    />,
+    [circleX,circleY,circleZ,circleR,circleN, baseR]);
 
     const PointsSphere3dCallback = useCallback(() => <PointsSphere3d
         n={sphereN}
-    />
-    ,[sphereX,sphereY,sphereZ,sphereR, baseR]);
+    />,
+    [sphereX,sphereY,sphereZ,sphereR,sphereN, baseR]);
+
+    const PointsRectangle3dCallback = useCallback(() => <PointsRectangle3d
+        n={rectangleN} 
+    />,
+    [rectangleX,rectangleY,rectangleZ,rectangleH,rectangleW,rectangleN]);
+
+    const PointsCuboid3dCallback = useCallback(() => <PointsCuboid3d
+        n={cuboidN}
+    />,
+    [cuboidX,cuboidY,cuboidZ,cuboidW,cuboidH,cuboidD,cuboidN]);
 
     return (
         <ControlsContext.Provider
@@ -80,6 +116,8 @@ export const Home3d = () => {
                 isPoint, setIsPoint,
                 isCircle, setIsCircle,
                 isSphere, setIsSphere,
+                isRectangle, setIsRectangle,
+                isCuboid, setIsCuboid,
                 pointX, setPointX,
                 pointY, setPointY,
                 pointZ, setPointZ,
@@ -93,6 +131,22 @@ export const Home3d = () => {
                 sphereZ, setSphereZ,
                 sphereR, setSphereR,
                 sphereN, setSphereN,
+                rectangleX, setRectangleX,
+                rectangleY, setRectangleY,
+                rectangleZ, setRectangleZ,
+                rectangleW, setRectangleW,
+                rectangleH, setRectangleH,
+                rectangleN, setRectangleN,
+                cuboidX, setCuboidX,
+                cuboidY, setCuboidY,
+                cuboidZ, setCuboidZ,
+                cuboidW, setCuboidW,
+                cuboidH, setCuboidH,
+                cuboidD, setCuboidD,
+                cuboidN, setCuboidN,
+                innerLines, setInnerLines,
+                surfaceLines, setSurfaceLines,
+                outerLines, setOuterLines
             }}
         >
             <Container
@@ -125,7 +179,7 @@ export const Home3d = () => {
                         <mesh>
                             <InvertedSphere
                                 colorIn="black"
-                                colorOut="black"
+                                colorOut="green"
                                 r={1}
                             />
                             <InvertedSphere
@@ -144,6 +198,14 @@ export const Home3d = () => {
                             {
                                 isSphere &&
                                 <PointsSphere3dCallback />
+                            }
+                            {
+                                isRectangle &&
+                                <PointsRectangle3dCallback />
+                            }
+                            {
+                                isCuboid &&
+                                <PointsCuboid3dCallback />
                             }
                         </mesh>
                     }
