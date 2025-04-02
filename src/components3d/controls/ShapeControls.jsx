@@ -7,6 +7,7 @@ import SphereControls from "./SphereControls";
 import { LineControls } from "./LineControls";
 import RectangleControls from "./RectangleControls";
 import CuboidControls from "./CuboidControls";
+import ProjectionControls from "./ProjectionControls";
 
 export const ShapeControls = () => {
     const {
@@ -34,7 +35,9 @@ export const ShapeControls = () => {
     return (
         <Stack
             sx={{
-                width: "15vw"
+                width: "15vw",
+                height: "98vh",
+                overflowY: "scroll"
             }}
         >
             <Accordion
@@ -100,7 +103,22 @@ export const ShapeControls = () => {
                     <CuboidControls />
                 </AccordionDetails>
             </Accordion>
-            <LineControls />
+            <Accordion>
+                <AccordionSummary>
+                    Line Controls
+                </AccordionSummary>
+                <AccordionDetails>
+                    <LineControls />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary>
+                    Shape Controls
+                </AccordionSummary>
+                <AccordionDetails>
+                    <ProjectionControls />
+                </AccordionDetails>
+            </Accordion>
         </Stack>
     );
 }

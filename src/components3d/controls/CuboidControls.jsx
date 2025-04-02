@@ -28,6 +28,7 @@ export const CuboidControls = () => {
                 id="Center-X"
                 value={cuboidX}
                 onChange={x => setCuboidX(x.target.value)}
+                onDoubleClick={() => setCuboidX(0)}
                 valueLabelDisplay="on"
                 min={-baseR}
                 max={baseR}
@@ -39,6 +40,7 @@ export const CuboidControls = () => {
                 label="Center Y"
                 value={cuboidY}
                 onChange={y => setCuboidY(y.target.value)}
+                onDoubleClick={() => setCuboidY(0)}
                 valueLabelDisplay="on"
                 min={-baseR}
                 max={baseR}
@@ -50,6 +52,7 @@ export const CuboidControls = () => {
                 label="Center Z"
                 value={cuboidZ}
                 onChange={z => setCuboidZ(z.target.value)}
+                onDoubleClick={() => setCuboidZ(0)}
                 valueLabelDisplay="on"
                 min={-baseR}
                 max={baseR}

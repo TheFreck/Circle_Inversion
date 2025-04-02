@@ -28,6 +28,11 @@ export const Home3d = () => {
     const [baseZ, setBaseZ] = useState(0);
     const [baseR, setBaseR] = useState(50);
 
+    // projections
+    const [isInner, setIsInner] = useState(true);
+    const [isSurface, setIsSurface] = useState(true);
+    const [isOuter, setIsOuter] = useState(true);
+
     // shapes
     const [isPoint, setIsPoint] = useState(false);
     const [isCircle, setIsCircle] = useState(false);
@@ -69,7 +74,7 @@ export const Home3d = () => {
     const [cuboidW, setCuboidW] = useState(40);
     const [cuboidH, setCuboidH] = useState(40);
     const [cuboidD, setCuboidD] = useState(40);
-    const [cuboidN, setCuboidN] = useState(10);
+    const [cuboidN, setCuboidN] = useState(2);
     
     // lines
     const [innerLines, setInnerLines] = useState(false);
@@ -146,7 +151,10 @@ export const Home3d = () => {
                 cuboidN, setCuboidN,
                 innerLines, setInnerLines,
                 surfaceLines, setSurfaceLines,
-                outerLines, setOuterLines
+                outerLines, setOuterLines,
+                isInner, setIsInner,
+                isSurface, setIsSurface,
+                isOuter, setIsOuter,
             }}
         >
             <Container

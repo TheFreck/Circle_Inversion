@@ -8,13 +8,13 @@ export const getPositions = (x1,x2,y1,y2,z1,z2,n,baseR,cb) => {
             const stepX = (x2-x1)/n;
             const stepY = (y2-y1)/n;
             const stepZ = (z2-z1)/n;
-            
+
             const innerP1 = {
                 x: x1+i*stepX,
-                y: y1,
-                z: z1+j*stepZ,
+                y: y1+i*stepY,
+                z: z1,
                 red,green,blue
-            };
+            }
             const innerP2 = {
                 x: x1,
                 y: y1+i*stepY,
@@ -22,30 +22,29 @@ export const getPositions = (x1,x2,y1,y2,z1,z2,n,baseR,cb) => {
                 red,green,blue
             }
             const innerP3 = {
-                x: x2-i*stepX,
-                y: y2,
+                x: x1+i*stepX,
+                y: y1,
                 z: z1+j*stepZ,
                 red,green,blue
-            };
+            }
             const innerP4 = {
-                x: x2,
+                x: x2-i*stepX,
                 y: y2-i*stepY,
-                z: z1+j*stepZ,
-                red,green,blue
-            }
-            const innerP5 = {
-                x: x1+i*stepX,
-                y: y1+j*stepY,
-                z: z1,
-                red,green,blue
-            }
-            const innerP6 = {
-                x: x1+i*stepX,
-                y: y1+j*stepY,
                 z: z2,
                 red,green,blue
             }
-            console.log("innerP6: ", innerP6);
+            const innerP5 = {
+                x: x2,
+                y: y2-i*stepY,
+                z: z2-j*stepZ,
+                red,green,blue
+            }
+            const innerP6 = {
+                x: x2-i*stepX,
+                y: y2,
+                z: z2-j*stepZ,
+                red,green,blue
+            }
 
             const outerP1 = {
                 x: (baseR * baseR * innerP1.x) / (innerP1.x * innerP1.x + innerP1.y * innerP1.y + innerP1.z * innerP1.z),
@@ -83,7 +82,6 @@ export const getPositions = (x1,x2,y1,y2,z1,z2,n,baseR,cb) => {
                 z: (baseR * baseR * innerP6.z) / (innerP6.x * innerP6.x + innerP6.y * innerP6.y + innerP6.z * innerP6.z),
                 red, green, blue
             }
-            
 
             const R = Math.sqrt(innerP1.x * innerP1.x + innerP1.y * innerP1.y + innerP1.z * innerP1.z);
 
@@ -112,15 +110,15 @@ export const getPositions = (x1,x2,y1,y2,z1,z2,n,baseR,cb) => {
                 red,green,blue
             }
             const surfaceP5 = {
-                x: 0,
-                y: 0,
-                z: 0,
+                x: (R / baseR) * outerP5.x,
+                y: (R / baseR) * outerP5.y,
+                z: (R / baseR) * outerP5.z,
                 red,green,blue
             }
             const surfaceP6 = {
-                x: 0,
-                y: 0,
-                z: 0,
+                x: (R / baseR) * outerP6.x,
+                y: (R / baseR) * outerP6.y,
+                z: (R / baseR) * outerP6.z,
                 red,green,blue
             }
 
