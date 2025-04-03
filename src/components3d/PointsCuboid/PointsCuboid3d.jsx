@@ -61,7 +61,7 @@ export const PointsCuboid3d = ({ n }) => {
                                 position={[p.inner.x+baseX,p.inner.y+baseY,p.inner.z+baseZ]}
                             >
                                 <sphereGeometry
-                                    args={[.5, 50, 50]}
+                                    args={[.5, 1, 1]}
                                 />
                                 <meshPhongMaterial
                                     color={panelColors[i]}
@@ -75,7 +75,7 @@ export const PointsCuboid3d = ({ n }) => {
                                 position={[p.surface.x+baseX,p.surface.y+baseY,p.surface.z+baseZ]}
                             >
                                 <sphereGeometry
-                                    args={[.5, 50, 50]}
+                                    args={[.5, 1, 1]}
                                 />
                                 <meshPhongMaterial
                                     color={panelColors[i]}
@@ -89,7 +89,7 @@ export const PointsCuboid3d = ({ n }) => {
                                 position={[p.outer.x+baseX,p.outer.y+baseY,p.outer.z+baseZ]}
                             >
                                 <sphereGeometry
-                                    args={[.5, 50, 50]}
+                                    args={[.5, 1, 1]}
                                 />
                                 <meshPhongMaterial
                                     color={panelColors[i]}
