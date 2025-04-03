@@ -74,7 +74,7 @@ export const Home3d = () => {
     const [cuboidW, setCuboidW] = useState(40);
     const [cuboidH, setCuboidH] = useState(40);
     const [cuboidD, setCuboidD] = useState(40);
-    const [cuboidN, setCuboidN] = useState(25);
+    const [cuboidN, setCuboidN] = useState(10);
     
     // lines
     const [innerLines, setInnerLines] = useState(false);
