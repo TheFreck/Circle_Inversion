@@ -70,11 +70,11 @@ export const Home3d = () => {
     // cuboid
     const [cuboidX, setCuboidX] = useState(0);
     const [cuboidY, setCuboidY] = useState(0);
-    const [cuboidZ, setCuboidZ] = useState(20);
+    const [cuboidZ, setCuboidZ] = useState(0);
     const [cuboidW, setCuboidW] = useState(40);
     const [cuboidH, setCuboidH] = useState(40);
     const [cuboidD, setCuboidD] = useState(40);
-    const [cuboidN, setCuboidN] = useState(2);
+    const [cuboidN, setCuboidN] = useState(25);
     
     // lines
     const [innerLines, setInnerLines] = useState(false);
@@ -191,7 +191,7 @@ export const Home3d = () => {
                                 r={1}
                             />
                             <InvertedSphere
-                                colorIn="black"
+                                colorIn="white"
                                 colorOut="white"
                                 r={baseR}
                             />

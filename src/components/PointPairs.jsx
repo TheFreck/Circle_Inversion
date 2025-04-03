@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import ControlsContext from "../components3d/ControlsContext";
 
 export const PointPairs = ({ cx, cy, x, y, r, red, green, blue }) => {
-    const {innerLine,surfaceLine,outerLine} = useContext(ControlsContext);
     const Y = (r * r * y) / (x * x + y * y);
     const X = (r * r * x) / (x * x + y * y);
 
@@ -23,7 +21,7 @@ export const PointPairs = ({ cx, cy, x, y, r, red, green, blue }) => {
             x2={x+cx}
             y2={y+cy}
             stroke={`rgb(${red}, ${green}, ${blue})`}
-            strokeWidth={innerLine ? .01 : 0}
+            strokeWidth={.01}
         />
     </>
 }
